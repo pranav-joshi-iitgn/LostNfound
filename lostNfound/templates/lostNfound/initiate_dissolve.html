@@ -1,0 +1,69 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'lostNfound/style.css' %}">
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<h2>
+    Dissolve Request
+</h2>
+<table>
+<tr>
+    <td>
+        property
+    </td>
+    <td>
+        value
+    </td>
+</tr>
+<tr>
+    <td>
+        id
+    </td>
+    <td>
+        <a href="/lostNfound/{{ i.id }}">{{ i.id }}</a>
+    </td>
+</tr>
+<tr>
+    <td>
+        name
+    </td>
+    <td>
+        {{ i.name }}
+    </td>
+</tr>
+<tr>
+    <td>
+        owner
+    </td>
+    <td>
+        <a href="/lostNfound/person/{{ i.person.id }}">{{ i.person.name }}</a>
+    </td>
+</tr>
+<tr>
+    <td>
+        lost on
+    </td>
+    <td>
+        {{ i.date }}
+    </td>
+</tr>
+<tr>
+    <td>
+        keyword
+    </td>
+    <td>
+        {{ i.keywords }}
+    </td>
+</tr>
+</table>
+<p>
+If you are certain you want to dissolve this request, enter the id again, <br>
+then enter your password, <br>
+and click the submit button. <br>
+</p>
+<form action = "{% url 'lostNfound:dissolve_Request' %}" method="post"><br>
+    {% csrf_token %}
+    id : <input type="number" name="id"><br>
+    password : <input type="text" placeholder="enter the password" name="password"><br>
+    submit : <input type="submit" value="dissolve">
+</form>

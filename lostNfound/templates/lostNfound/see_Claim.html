@@ -1,0 +1,113 @@
+{% load static %}
+
+<link rel='stylesheet' href='/static/lostNfound/style.css'>
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<table>
+<thead>
+<tr>
+    <td>
+        property
+    </td>
+    <td>
+        value
+    </td>
+</tr>
+</thead>
+<tr>
+    <td>
+        name
+    </td>
+    <td>
+        {{ c.name }}
+    </td>
+</tr>
+<tr>
+    <td>
+        owner
+    </td>
+    <td>
+        <a href="/lostNfound/person/{{ c.person.id }}">{{ c.person.name }}</a>
+    </td>
+</tr>
+<tr>
+    <td>
+        contact
+    </td>
+    <td>
+        {{ c.person.contact }}
+    </td>
+</tr>
+<tr>
+    <td>
+        email
+    </td>
+    <td>
+        {{ c.person.email }}
+    </td>
+</tr>
+</tr>
+<tr>
+    <td>
+        found on
+    </td>
+    <td>
+        {{ c.date }}
+    </td>
+<tr>
+<tr>
+    <td>
+        location
+    </td>
+    <td>
+        {{ c.location }}
+    </td>
+<tr>
+    <td>
+        keyword
+    </td>
+    <td>
+        {{ c.keywords }}
+    </td>
+</tr>
+<tr>
+    <td>
+        description
+    </td>
+    <td>
+        <p>{{ c.description }}</p>
+    </td>
+</tr>
+<tr>
+    <td>
+        image
+    </td>
+    <td>
+        <img src='{{ c.image }}'>
+    </td>
+</tr>
+</table>
+The claim is for {{ c.items.count }} items so far.
+
+{% if c.items.count %}
+<table>
+    <tr>
+        <td> id </td>
+        <td> name </td>
+        <td> owner </td>
+        <td> contact </td>
+        <td> email </td>
+        <td> keywords </td>
+    </tr>
+{% for i in c.items.all %}
+    <tr>
+        <td><a href="https://pranavjoshi.pythonanywhere.com/lostNfound/{{ i.id }}/{{ c.id }}/">{{ i.id }}</a></td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.person.name }}</td>
+        <td>{{ i.person.contact }}</td>
+        <td>{{ i.person.email }}</td>
+        <td>{{ i.keywords }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endif %}

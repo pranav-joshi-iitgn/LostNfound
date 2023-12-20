@@ -1,0 +1,98 @@
+{% load static %}
+<link rel='stylesheet' href='/static/lostNfound/style.css'>
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<table>
+<thead>
+<tr>
+    <td>
+        property
+    </td>
+    <td>
+        value
+    </td>
+</tr>
+</thead>
+<tr>
+    <td>
+        item name
+    </td>
+    <td>
+        {{ c.name }}
+    </td>
+</tr>
+<tr>
+    <td>
+        finder
+    </td>
+    <td>
+        {{ c.person.name }}
+    </td>
+</tr>
+<tr>
+    <td>
+        contact
+    </td>
+    <td>
+        {{ c.person.contact }}
+    </td>
+</tr>
+<tr>
+    <td>
+        found on
+    </td>
+    <td>
+        {{ c.date }}
+    </td>
+</tr>
+<tr>
+    <td>
+        location
+    </td>
+    <td>
+        {{ c.location }}
+    </td>
+<tr>
+<tr>
+    <td>
+        email
+    </td>
+    <td>
+        {{ c.person.email }}
+    </td>
+</tr>
+<tr>
+    <td>
+        keywords
+    </td>
+    <td>
+        {{ c.keywords }}
+    </td>
+</tr>
+<tr>
+    <td>
+        description
+    </td>
+    <td>
+        <p>{{ c.description }}</p>
+    </td>
+</tr>
+<tr>
+    <td>
+        image
+    </td>
+    <td>
+        <img src='{{ c.image }}'>
+    </td>
+</tr>
+</table>
+<br> If you want to delete this claim, fill this form and submit.
+<form action = "{% url 'lostNfound:dissolve_claim' %}" method="post">
+    {% csrf_token %}
+    your name : <input type="text" name="owner"><br>
+    password : <input type="text" name="password"><br>
+    item id :<input type="number" name="item_id" value= '{{ i.id }}'><br>
+    claim id :<input type="number" name="claim_id" value='{{ c.id }}'><br>
+    <input type="submit" value = "dissolve" name="dissolve">
+    <input type="submit" value = "unlink" name="unlink">
+</form>

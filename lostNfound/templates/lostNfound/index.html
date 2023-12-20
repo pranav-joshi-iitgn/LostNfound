@@ -1,0 +1,22 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'lostNfound/style.css' %}">
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<h1>Lost and Found</h1>
+<ul>
+    <li><a href="/lostNfound/search/"> Found an item and want to return it or want to see if an item you lost has been found? Search the requests and the inventory.</a></li>
+    <li><a href="/lostNfound/Request/"> Lost or Found an item? Report it to us asap! </a></li>
+    <li><a href="/lostNfound/Registration/"> But before anything, register yourself. </a></li>
+    <li>Want to see your Dashboard? Tell us your username (and password to see some private info) . :
+    <form action="/lostNfound/login/" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="password" placeholder="password">
+    <input type="submit" value="Go">
+    </form>
+    </li>
+    <li><a href="/admin/"> For admins. </a></li>
+</ul>
+<br>
+If you have any questions or want a feature added, contact me at pranav.joshi@iitgn.ac.in

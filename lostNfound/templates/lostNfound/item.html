@@ -1,0 +1,120 @@
+{% load static %}
+<link rel='stylesheet' href='/static/lostNfound/style.css'>
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<table>
+<thead>
+<tr>
+    <td>
+        property
+    </td>
+    <td>
+        value
+    </td>
+</tr>
+</thead>
+<tr>
+    <td>
+        name
+    </td>
+    <td>
+        {{ i.name }}
+    </td>
+</tr>
+<tr>
+    <td>
+        owner
+    </td>
+    <td>
+        <a href="/lostNfound/person/{{ i.person.id }}">{{ i.person.name }}</a>
+    </td>
+</tr>
+<tr>
+    <td>
+        contact
+    </td>
+    <td>
+        {{ i.person.contact }}
+    </td>
+</tr>
+<tr>
+    <td>
+        lost on
+    </td>
+    <td>
+        {{ i.date }}
+    </td>
+</tr>
+<tr>
+    <td>
+        location
+    </td>
+    <td>
+        {{ i.location }}
+    </td>
+</tr>
+<tr>
+    <td>
+        email
+    </td>
+    <td>
+        {{ i.person.email }}
+    </td>
+</tr>
+<tr>
+    <td>
+        keyword
+    </td>
+    <td>
+        {{ i.keywords }}
+    </td>
+</tr>
+<tr>
+    <td>
+        description
+    </td>
+    <td>
+        <p>{{ i.description }}</p>
+    </td>
+</tr>
+<tr>
+    <td>
+        image
+    </td>
+    <td>
+        <img src='{{ i.image }}'>
+    </td>
+</tr>
+</table>
+<a href='https://pranavjoshi.pythonanywhere.com/lostNfound/{{ i.id }}/claim'>
+Do you think you have found this item ? Make a claim and help us out
+</a> <br>
+<a href='https://pranavjoshi.pythonanywhere.com/lostNfound/{{ i.id }}/initiate_dissolve'>
+If you have found your lost item, or want to give up the search, click this link to dissolve the request
+</a> <br>
+{{ i.claim_set.count }} claims made so far.
+
+{% if i.claim_set.count %}
+<table>
+    <thead>
+    <tr>
+        <td> id </td>
+        <td> owner </td>
+        <td> contact </td>
+        <td> email </td>
+        <td> keywords </td>
+        <td> date </td>
+    </tr>
+    </thead>
+{% for c in i.claim_set.all %}
+    <tr>
+        <td><a href="https://pranavjoshi.pythonanywhere.com/lostNfound/{{ i.id }}/{{ c.id }}/">{{ c.id }}</a></td>
+        <td>{{ c.person.name }}</td>
+        <td>{{ c.person.contact }}</td>
+        <td>{{ c.person.email }}</td>
+        <td>{{ c.keywords }}</td>
+        <td>{{ c.date }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endif %}

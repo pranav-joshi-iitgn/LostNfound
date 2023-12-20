@@ -1,0 +1,43 @@
+{% load static %}
+<link rel='stylesheet' href='/static/lostNfound/style.css'>
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<h1> Search Results </h1>
+<br>
+<table>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>owner</td>
+        <td>contact</td>
+        <td>email</td>
+        <td>date</td>
+        {% if isclaim %}
+        <td>number of items</td>
+        {% else %}
+        <td>number of claims</td>
+        {% endif %}
+        <td>keywords</td>
+    </tr>
+
+{% for i in L %}
+    <tr>
+        {% if isclaim %}
+        <td><a href='/lostNfound/claim/{{ i.id }}'>{{ i.id }}</a></td>
+        {% else %}
+        <td><a href='/lostNfound/{{ i.id }}'>{{ i.id }}</a></td>
+        {% endif %}
+        <td>{{ i.name }}</td>
+        <td><a href="/lostNfound/person/{{ i.person.id }}">{{ i.person.name }}</a></td>
+        <td>{{ i.person.contact }}</td>
+        <td>{{ i.person.email }}</td>
+        <td>{{ i.date }}</td>
+        {% if isclaim %}
+        <td>{{ i.items.count }}</td>
+        {% else %}
+        <td>{{ i.claim_set.count }}</td>
+        {% endif %}
+        <td>{{ i.keywords }}</td>
+    </tr>
+{% endfor %}
+</table>

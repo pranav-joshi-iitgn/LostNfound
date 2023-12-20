@@ -1,0 +1,157 @@
+{% load static %}
+<link rel='stylesheet' href='/static/lostNfound/style.css'>
+<script src="{% static 'lostNfound/script.js' %}"></script>
+<table>
+<thead>
+<tr>
+    <td>
+        property
+    </td>
+    <td>
+        value
+    </td>
+</tr>
+</thead>
+<tr>
+    <td>
+        id
+    </td>
+    <td>
+        {{ p.id }}
+    </td>
+</tr>
+<tr>
+    <td>
+        username
+    </td>
+    <td>
+        {{ p.username }}
+    </td>
+</tr>
+<tr>
+    <td>
+        name
+    </td>
+    <td>
+        {{ p.name }}
+    </td>
+</tr>
+<tr>
+    <td>
+        contact
+    </td>
+    <td>
+        {{ p.contact }}
+    </td>
+</tr>
+<tr>
+    <td>
+        email
+    </td>
+    <td>
+        {{ p.email }}
+    </td>
+</tr>
+<tr>
+    <td>
+        address
+    </td>
+    <td>
+        {{ p.address }}
+    </td>
+</tr>
+<tr>
+    <td>
+        image
+    </td>
+    <td>
+        <img src='{{ p.image }}'>
+    </td>
+</tr>
+</table>
+
+{{ p.claim_set.count }} items found so far.
+
+{% if p.claim_set.count %}
+<table>
+<thead>
+    <tr>
+        <td> id </td>
+        <td> name </td>
+        <td> date </td>
+        <td> keywords </td>
+    </tr>
+</thead>
+<tbody>
+{% for c in p.claim_set.all %}
+    <tr>
+        <td><a href="https://pranavjoshi.pythonanywhere.com/lostNfound/claim/{{ c.id }}/">{{ c.id }}</a></td>
+        <td>{{ c.name }}</td>
+        <td>{{ c.date }}</td>
+        <td>{{ c.keywords }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+{{ p.item_set.count }} items lost so far.
+{% if p.claim_set.count %}
+<table>
+<thead>
+    <tr>
+        <td> id </td>
+        <td> name </td>
+        <td> date </td>
+        <td> keywords </td>
+    </tr>
+</thead>
+<tbody>
+{% for i in p.item_set.all %}
+    <tr>
+        <td><a href="https://pranavjoshi.pythonanywhere.com/lostNfound/{{ i.id }}/">{{ i.id }}</a></td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.date }}</td>
+        <td>{{ i.keywords }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+{% if login %}
+<br>
+Reports :
+<table>
+<thead>
+    <tr>
+        <td>
+            reported
+        </td>
+        <td>
+            date
+        </td>
+        <td>
+            description
+        </td>
+    </tr>
+</thead>
+{% for r in p.reports.all%}
+    <tr>
+        <td>
+            <a href="/lostNfound/person/{{ r.criminal.id }}">{{ r.criminal.username }}</a>
+        </td>
+        <td>
+            {{ r.date }}
+        </td>
+        <td>
+            {{ r.description }}
+        </td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<a href="/lostNfound/file_report/{{ p.id }}">
+Do you wish to report this person, or want to clear a report you made earlier? <br>
+Then click here.
+</a>
+{% endif%}

@@ -1,0 +1,139 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'lostNfound/style.css' %}">
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<h2>
+    {{ i.name }} (id : {{ i.id }})
+</h2>
+<button id="B"> switch </button> between linking an existing claim and making a new claim.
+<br>
+<form action = "{% url 'lostNfound:make_claim' i.id %}" method="post"><br>
+{% csrf_token %}
+<table id="F">
+<thead>
+    <tr>
+        <td>
+            property :
+        </td>
+        <td>
+            value
+        </td>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+            item name :
+        </td>
+        <td>
+            <input type="text" placeholder="name of item" name="name" value="{{ i.name }}">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            username :
+        </td>
+        <td>
+            <input type="text" placeholder="username (mandatory)" name="username">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            password :
+        </td>
+        <td>
+            <input type="text" placeholder="account password (mandatory)" name="password">
+        </td>
+    </tr>
+</tbody>
+<tbody id="make">
+    <tr>
+        <td>
+            date :
+        </td>
+        <td>
+            <input type="date" name="date">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            keywords :
+        </td>
+        <td>
+            <input type="text" name="keywords" placeholder="comma saperated keywords">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            image url :
+        </td>
+        <td>
+            <input type="text" name="image">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            location :
+        </td>
+        <td>
+            <textarea placeholder="location" name="location"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            description :
+        </td>
+        <td>
+            <textarea placeholder="desription of item" name="description"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            make a claim :
+        </td>
+        <td>
+            <input type="submit" name="make">
+        </td>
+    </tr>
+</tbody>
+<tbody id="link">
+    <tr>
+        <td>
+            claim id :
+        </td>
+        <td>
+            <input type="number" name="claim_id">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            link a claim :
+        </td>
+        <td>
+            <input type="submit" name="link">
+        </td>
+    </tr>
+</tbody>
+</table>
+</form>
+<script>
+    M = document.getElementById("make")
+    L = document.getElementById("link")
+    F = document.getElementById("F")
+    make = true
+    F.removeChild(L)
+    function Switch(e){
+        if(make){
+            F.removeChild(M)
+            F.appendChild(L)
+            make=false
+        } else{
+            F.removeChild(L)
+            F.appendChild(M)
+            make=true
+        }
+    }
+    B = document.getElementById("B")
+    B.onclick = Switch
+</script>

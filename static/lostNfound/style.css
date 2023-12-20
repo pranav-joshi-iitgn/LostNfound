@@ -1,0 +1,70 @@
+body {
+    background-color:black;
+    color:white;
+}
+a {
+    color: lightblue;
+}
+ul, ol {
+    border : 2px solid green;
+    border-radius : 50px;
+}
+li {
+    margin:10px;
+}
+h1, h2, h3 {
+    color : green;
+}
+form, table {
+    border : 2px solid green;
+    border-radius : 10px;
+    color:white;
+    width:fit-content;
+    height:fit-content;
+}
+form{
+    padding: 10px;
+}
+table{
+    border-spacing:0;
+    padding:0;
+}
+tbody > tr:nth-of-type(even) {
+    background-color: rgb(25, 25, 25);
+}
+thead > tr{
+    background-color: darkgreen;
+}
+tbody > tr {
+    margin:0;
+}
+tr > td:nth-of-type(even){
+    background-color: rgba(25, 54, 51, 0.5);
+}
+td {
+    color:white;
+    border: 1px solid white;
+    margin:0;
+    padding:10px;
+}
+input, label, textarea, button {
+    background-color : gray;
+    border-radius : 5px;
+    color:black;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid green;
+}
+textarea{
+    width:40vw;
+}
+input[type=submit], button {
+    background-color : lightgreen;
+}
+input[type=submit]:hover, button:hover {
+    background-color : green;
+}
+input[type=submit]:focus, button:focus {
+    background-color : yellow;
+    color : white;
+}

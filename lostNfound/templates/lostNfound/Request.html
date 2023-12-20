@@ -1,0 +1,104 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'lostNfound/style.css' %}">
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+
+<h2>
+    Make a request
+</h2><br>
+<form action = "{% url 'lostNfound:make_Request' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<table>
+    <thead>
+    <tr>
+        <td>
+            property
+        </td>
+        <td>
+            value
+        </td>
+    </tr>
+    </thead>
+    <tr>
+        <td>
+            item name
+        </td>
+        <td>
+            <input type="text" placeholder="name of item" name="name">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            username
+        </td>
+        <td>
+            <input type="text" placeholder="username" name="username">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            password
+        </td>
+        <td>
+            <input type="text" placeholder="create a password (this feild is mandatory)" name="password">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            date (last seen / found on)
+        </td>
+        <td>
+            <input type="date" name="date">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            keywords
+        </td>
+        <td>
+            <input type="text" name="keywords" placeholder="comma saperated keywords">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            image url
+        </td>
+        <td>
+            <input type="text" name="image">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            location (s)(all supected if lost)
+        </td>
+        <td>
+            <textarea placeholder="location" name="location"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            description
+        </td>
+        <td>
+            <textarea placeholder="desription of item" name="description"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            If you have lost the item, click this :
+        </td>
+        <td>
+            <input type="submit" name="item">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            If you have found this item, click this :
+        </td>
+        <td>
+            <input type="submit" name="claim">
+        </td>
+    </tr>
+</table>
+</form>

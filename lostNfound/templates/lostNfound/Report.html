@@ -1,0 +1,20 @@
+{% load static %}
+<link rel='stylesheet' href='/static/lostNfound/style.css'>
+<script src="{% static 'lostNfound/script.js' %}"></script>
+
+<p>
+Please read this carefully.<br>
+You are about to file or clear a report on <a href="/lostNfound/person/{{ criminal.id }}">{{ criminal.username }}</a><br>
+It is mandatory for you to fill all the field of this form, including the description.<br>
+If it is found that you are misusing this facility, we may have to delete your account.<br>
+The description can be as big as needed, but it should be sufficient. Write down everything that you can describe about the event.<br>
+</p>
+<form action="/lostNfound/report/" method="post">
+    {% csrf_token %}
+    criminal username : <input type="text" name="criminal" value="{{ criminal.username }}"><br>
+    your username     : <input type="text" name="reportee"><br>
+    your password     : <input type="text" name="password"><br>
+    description       : <textarea name="description"></textarea><br>
+    make report       : <input type="submit" name="make"><br>
+    clear report      : <input type="submit" name="clear"><br>
+</form>
